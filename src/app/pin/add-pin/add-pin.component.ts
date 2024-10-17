@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { FileUploader } from 'ng2-file-upload';
+import { SharedService } from 'src/app/services/shared-service';
 
+const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'app-add-pin',
@@ -11,9 +14,35 @@ export class AddPinComponent implements OnInit {
   heading:string;
   obj:any = {};
   public items:string[]=[];
+  
+  // File Upload
+  public uploader:FileUploader = new FileUploader({url: URL});
+  fileName:string = 'Darg and Drop File';
 
-  constructor(private activeModalService: NgbActiveModal) { }
+  public dropped(file:any):void {
+    this.fileName = file[0].name;
 
+    var base64String;
+    let files = file[0];
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      base64String = reader.result as string;
+      this.obj.image = base64String;
+
+    }
+    if (files) {
+      reader.readAsDataURL(files);      
+    }
+  }
+  // File Upload
+
+  
+
+
+  constructor(private activeModalService: NgbActiveModal, private _sharedService:SharedService) { }
+
+  
   ngOnInit(): void { 
     let item = localStorage.getItem('customerItem');
     let array = JSON.parse(item);
@@ -24,8 +53,11 @@ export class AddPinComponent implements OnInit {
     this.activeModalService.close({data:'close'})
   }
 
+  selectFile(event){
+  }
+
   savePin(event){
-    if(event.form.status == 'INVALID'){
+    if(event.form.status == 'INVALID'){ 
        return
     }
     else{

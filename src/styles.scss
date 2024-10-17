@@ -74,5 +74,19 @@ h1{
     color:red;
 }
 
+
+.my-drop-zone{
+    border: 2px dashed #cecece;
+    padding: 25px 10px;
+    text-align: center;
+    color: #cecece;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.nv-file-over:hover{
+    border: 2px dashed orange
+}
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

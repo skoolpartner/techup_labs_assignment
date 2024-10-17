@@ -23,7 +23,7 @@
           <tbody>
             <tr *ngFor="let _list of tableArray">
               <td>{{_list.title}}</td>
-              <td>{{_list.image}}</td>
+              <td><img [src]="_list.image" style="width:80px;"></td>
               <td><div *ngFor="let _customer of _list.collaboratory">{{_customer}}</div></td>
               <td>{{_list.privacy}}</td>
             </tr>        

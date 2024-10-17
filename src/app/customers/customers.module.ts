@@ -4,9 +4,12 @@ import { CommonModuleModule } from '../common-module/common-module.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgxSelectModule } from 'ngx-select-ex';
+import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 
-
+const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more options
+  optionValueField: 'id',
+  optionTextField: 'name'
+};
 @NgModule({
   declarations: [AddCustomersComponent],
   imports: [
@@ -14,7 +17,7 @@ import { NgxSelectModule } from 'ngx-select-ex';
     CommonModule,
     FormsModule,
     BrowserModule,
-    NgxSelectModule,
+    NgxSelectModule.forRoot(CustomSelectOptions)
   ]
 })
 export class CustomersModule { }
