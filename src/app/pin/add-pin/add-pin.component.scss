@@ -1,0 +1,13 @@
+@import url('../../../styles.scss');
+
+.radio-container{
+    display: flex;
+    justify-content: space-between;
+    width: 180px;
+    font-weight: 500;
+
+    input{
+        float: left;
+        margin: 6px 6px 0px 0px;
+    }
+}

@@ -1,0 +1,92 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{heading}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form #f="ngForm" (ngSubmit)="formSubmit(f)">
+    <div class="modal-body">
+          <div class="col-md-12"> 
+              
+              <label class="title">{{labelArray[0]}}</label>
+              <input type="text" placeholder="Enter Title" 
+              required
+              #name="ngModel" name="name" class="form-control mt-1" [(ngModel)]="obj.title" />
+              
+              <span class="text-danger"
+                *ngIf="(name.touched || f.submitted) && name.errors?.required">
+                {{labelArray[0]}} is required
+              </span>
+
+            </div>
+
+          <div class="clearfix"></div>
+
+          <div class="col-md-12 mt-2">
+
+              <label class="title">{{labelArray[1]}}</label>
+              <input type="text" placeholder="Enter Email" required class="form-control mt-1" 
+              #email="ngModel" name="email" [(ngModel)]="obj.email" email />
+
+              <span class="text-danger"
+                *ngIf="(email.touched || f.submitted) && email?.errors?.required">
+                {{labelArray[1]}} is required
+              </span>
+
+              <span class="text-danger" *ngIf="email.touched && email?.errors?.email">
+                  Enter a valid {{labelArray[1]}}
+              </span>
+          </div>
+
+          <div class="clearfix"></div>
+
+
+          <div class="col-md-12 mt-2">
+              <label class="title mb-1">{{labelArray[2]}}</label>
+              <ngx-select 
+                (close)="regionChange(obj.region)"
+                [items]="region"  
+                [(ngModel)]="obj.region"
+                optionValueField="region"
+                optionTextField="region"
+                placeholder="Select"
+                name="region"
+                required
+              >
+            
+              </ngx-select>
+              <span class="text-danger"
+              *ngIf="f.submitted && !obj.region">
+              {{labelArray[2]}} is required
+            </span>
+          </div>
+
+          <div class="clearfix"></div>
+
+
+          <div class="col-md-12 mt-2">
+            <label class="title mb-1">{{labelArray[3]}}</label>
+            <ngx-select 
+              
+              [disabled]="!obj.region"
+              [items]="countries"  
+              [(ngModel)]="obj.country"
+              optionValueField="country"
+              optionTextField="country"
+              placeholder="Select"
+              name="country"
+              required
+            >
+          
+            </ngx-select>
+            <span class="text-danger"
+            *ngIf="f.submitted && !obj.country">
+            {{labelArray[3]}} is required
+          </span>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark">{{saveButtonLabel}}</button>
+    </div>
+  </form>

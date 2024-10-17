@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{heading}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <form #f="ngForm" (ngSubmit)="savePin(f)">
+    <div class="modal-body">
+          <div class="col-md-12 mb-3">
+              <label class="mb-2 title">Title</label>
+              <input type="text" placeholder="Enter Title" #title="ngModel" required name="title" class="form-control" [(ngModel)]="obj.title" />
+
+              <span class="text-danger"
+                *ngIf="(title.touched || f.submitted) && title.errors?.required">
+                Title is required
+              </span>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="col-md-12 mt-2 mb-3">
+              <label class="mb-2 title">Select Image</label>
+              <input type="text" placeholder="Enter Title" #img="ngModel" required name="img" [(ngModel)]="obj.image" />
+          </div>
+
+          <div class="clearfix"></div>
+
+
+          <div class="col-md-12 mt-2 mb-3">
+              <label class="mb-2 title">Select Collaboratory</label>
+              <ngx-select 
+                [items]="items"
+                optionValueField="title"
+                optionTextField="title"
+                [(ngModel)]="obj.collaboratory"
+                [multiple]="true"
+                required
+                name="collaboratory"
+                placeholder="Select"></ngx-select>
+
+                <span class="text-danger" *ngIf="f.submitted && !obj.collaboratory">
+                  Collaboratory is required
+                </span>
+          </div>
+
+          <div class="col-md-12 mt-2 mb-3">
+            <label class="mb-2 title">Privacy</label>
+            <div class="radio-container">
+              <span><input type="radio" name="privacy" [required]="!obj.privacy" [(ngModel)]="obj.privacy" #privacy="ngModel" value="Private"><span>Private</span></span>
+              <span><input type="radio" name="privacy" [required]="!obj.privacy" [(ngModel)]="obj.privacy" #privacy="ngModel" value="Public"><span>Public</span></span>
+            </div>
+
+            <span class="text-danger" *ngIf="f.submitted && !obj.privacy">
+              Privacy is required
+            </span>
+          </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark">Save Pin</button>
+    </div>
+  </form>

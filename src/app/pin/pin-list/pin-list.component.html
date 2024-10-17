@@ -1,0 +1,39 @@
+
+<div class="container">
+
+    <button type="button" class="btn btn-primary custom-primary-btn float-end" *ngIf="buttonTop"  (click)="addCustomers(buttonTop)">{{buttonTop}}</button>
+
+    <div class="clearfix"></div>
+
+    <!-- Page heading with button -->
+    <div class="table-heading">
+        <h1>{{pageHeading}}</h1>
+        <div class="add-button-container">
+            <button type="button" class="btn btn-primary custom-primary-btn ms-2" *ngIf="buttonInline" (click)="addPin(buttonInline)">{{buttonInline}}</button>
+        </div>
+    </div>
+
+     <!-- List table -->
+    <table class="table custom-table" *ngIf="tableArray.length > 0">
+        <thead>
+            <tr>
+              <th scope="col" *ngFor="let _head of tableHeadings">{{_head}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let _list of tableArray">
+              <td>{{_list.title}}</td>
+              <td>{{_list.image}}</td>
+              <td><div *ngFor="let _customer of _list.collaboratory">{{_customer}}</div></td>
+              <td>{{_list.privacy}}</td>
+            </tr>        
+          </tbody>
+    </table>
+
+
+    <!-- If no data -->
+    <div class="no-data-container" *ngIf="tableArray.length == 0">
+      <p>No Data Found</p>
+    </div>
+
+</div>
