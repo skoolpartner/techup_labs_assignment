@@ -24,7 +24,6 @@
            
               <div class="my-drop-zone"
                 (onFileDrop)="dropped($event)"
-                [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
                 ng2FileDrop [uploader]="uploader"
                 [(ngModel)]="obj.image"
                >
